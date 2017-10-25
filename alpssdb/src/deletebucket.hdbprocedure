@@ -1,0 +1,16 @@
+PROCEDURE "alpss.alpssdb::deletebucket" (
+	IN im_bucketid NVARCHAR(10),
+	OUT ex_error NVARCHAR(100)
+	)
+
+   LANGUAGE SQLSCRIPT SQL
+
+   SECURITY INVOKER AS
+
+  -- READS SQL DATA AS
+BEGIN
+
+DELETE FROM "alpss.alpssdb::alpssf.PlanningBucket" 
+	WHERE "PlanningBucketId"=im_bucketid;
+
+END

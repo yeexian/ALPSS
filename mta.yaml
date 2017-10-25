@@ -1,0 +1,40 @@
+ID: alpss
+_schema-version: '2.0'
+version: 0.0.1
+
+modules:
+ - name: alpssdb
+   type: hdb
+   path: alpssdb
+   requires:
+    - name: hdi_alpssdb
+
+
+ - name: alpssjs
+   type: nodejs
+   path: alpssjs
+   requires:
+    - name: alpssdb
+    - name: hdi_alpssdb
+   provides:
+    - name: alpssjs_api
+      properties:
+        service_url: ${default-url}
+
+ 
+ - name: alpssui
+   type: html5
+   path: alpssui
+   requires:
+    - name: alpssjs_api
+      group: destinations
+      properties:
+        name: alpssjs_be
+        url:  ~{service_url}
+        
+        
+resources:
+ - name: hdi_alpssdb
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container

@@ -1,0 +1,15 @@
+service {
+ "alpss.alpssdb::alpssf.Plan" as "Plan" navigates ("PlanToBucketAssocSet" as "NavPB", "PlanToFiscalYearAssocSet" as "NavFY");
+ "alpss.alpssdb::alpssf.PlanningBucket" as "PlanningBucket" navigates ("BucketToBucketTypeAssocSet" as "NavBBT");
+ "alpss.alpssdb::alpssf.C_FiscalYearDefinition" as "FiscalYearDefinition";
+ "alpss.alpssdb::alpssf.C_BucketTypeDefinition" as "BucketTypeDefinition";
+ 
+ association "PlanToBucketAssocSet" principal "Plan"("PlanId")
+ multiplicity "1" dependent "PlanningBucket"("PlanId") multiplicity "*";
+ 
+ association "PlanToFiscalYearAssocSet" principal "Plan"("FiscalYearId")
+ multiplicity "1" dependent "FiscalYearDefinition"("FiscalYearId") multiplicity "1"; 
+ 
+ association "BucketToBucketTypeAssocSet" principal "PlanningBucket"("BucketTypeId")
+ multiplicity "1" dependent "BucketTypeDefinition"("BucketTypeId") multiplicity "1";
+}

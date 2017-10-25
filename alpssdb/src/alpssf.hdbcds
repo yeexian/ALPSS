@@ -1,0 +1,34 @@
+namespace alpss.alpssdb;
+
+context alpssf {
+
+    entity Plan {
+        key PlanId           : String(10);
+            Description      : String(150);        
+        	FiscalYearId     : String(10);
+            Year             : Integer;
+            BudgetAmount     : Decimal(15, 2);
+            Status           : String(100);
+            HierarchyJSON	 : LargeString;
+    };
+
+    entity PlanningBucket {
+        key PlanningBucketId : String(10);
+        	PlanId			 : String(10);
+            Description      : String(150);
+        	BucketTypeId     : String(10);            
+        	SuperiorBucketId : String(10);
+        	PlanningUnitId   : String(10);
+        	Quantity         : Integer;
+    };
+
+    entity C_FiscalYearDefinition {
+        key FiscalYearId : String(10);
+            CalendarYear : Integer;
+    };
+
+    entity C_BucketTypeDefinition {
+        key BucketTypeId : String(10);
+            Name         : String(100);
+    };
+};

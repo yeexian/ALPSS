@@ -1,0 +1,17 @@
+PROCEDURE "alpss.alpssdb::createbucket" (
+	IN im_bucketid NVARCHAR(10), im_planid NVARCHAR(10), im_desc NVARCHAR(150), im_buckettypeid NVARCHAR(10), im_superiorbucketid NVARCHAR(10), im_planningunitid NVARCHAR(10), im_quantity INTEGER,
+	OUT ex_error NVARCHAR(150)
+)
+
+   LANGUAGE SQLSCRIPT SQL
+   
+   SECURITY INVOKER AS
+   
+   --READS SQL DATA AS
+   
+BEGIN
+
+INSERT INTO "alpss.alpssdb::alpssf.PlanningBucket" 
+	VALUES (im_bucketid,im_planid,im_desc,im_buckettypeid,im_superiorbucketid,im_planningunitid,im_quantity);
+
+END
