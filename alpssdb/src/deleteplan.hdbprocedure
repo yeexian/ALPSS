@@ -1,0 +1,15 @@
+PROCEDURE "alpss.alpssdb::deleteplan" ( 
+	IN im_planid NVARCHAR(10),
+	OUT ex_error NVARCHAR(100)
+)
+  LANGUAGE SQLSCRIPT SQL
+
+  SECURITY INVOKER AS
+
+   --READS SQL DATA AS
+BEGIN
+
+DELETE FROM "alpss.alpssdb::alpssf.Plan"
+	WHERE "PlanId"=im_planid;
+
+END

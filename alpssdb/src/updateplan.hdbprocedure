@@ -1,0 +1,15 @@
+PROCEDURE "alpss.alpssdb::updateplan" ( 
+	IN im_planid NVARCHAR(10), im_desc NVARCHAR(150), im_fiscalyearid NVARCHAR(10), im_year INTEGER, im_amount FLOAT, im_status NVARCHAR(100), im_jsonstring NVARCHAR(8388607),
+	OUT ex_error NVARCHAR(100)
+)
+  LANGUAGE SQLSCRIPT SQL
+
+  SECURITY INVOKER AS
+
+   --READS SQL DATA AS
+BEGIN
+
+UPDATE "alpss.alpssdb::alpssf.Plan" SET "Description"=im_desc, "FiscalYearId"=im_fiscalyearid, "Year"=im_year,"BudgetAmount"=im_amount,"Status"= im_status, "HierarchyJSON"=im_jsonstring
+	WHERE "PlanId"=im_planid;
+
+END

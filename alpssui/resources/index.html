@@ -1,0 +1,40 @@
+<!DOCTYPE HTML><head><meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+<title>ALPSS</title>
+
+<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+
+id="sap-ui-bootstrap" data-sap-ui-libs="sap.ui.commons, sap.ui.table" data-sap-ui-theme="sap_bluecrystal">
+
+</script>
+<script src="./Util.js" > </script>
+<script>
+
+  var oModel = new sap.ui.model.odata.ODataModel("/test.xsodata", true);
+
+  var oTable = new sap.ui.table.Table({
+
+              title: "Plan", visibleRowCount: 5, id: "planids",
+
+              toolbar: new sap.ui.commons.Toolbar({items: [
+
+              new sap.ui.commons.Button({text: "Add Plan", press:createPlan}),
+              new sap.ui.commons.Button({text: "Delete Plan", press:deletePlan}),
+              new sap.ui.commons.Button({text: "Update Plan", press:updatePlan}),
+              new sap.ui.commons.Button({text: "Add Bucket", press:createBucket}),
+              new sap.ui.commons.Button({text: "Delete Bucket", press:deleteBucket}),
+              new sap.ui.commons.Button({text: "Update Bucket", press:updateBucket})
+
+       ]})});
+
+  oTable.addColumn(new sap.ui.table.Column({ label: "Plan ID", template: "PlanId" }));
+
+  oTable.setModel(oModel); oTable.bindRows("/Plan"); oTable.placeAt("content");
+
+</script>
+
+</head>
+
+  <body class='sapUiBody'> <div id='content'></div> </body>
+
+</html>

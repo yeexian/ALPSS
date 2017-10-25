@@ -1,0 +1,11 @@
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "none",
+	"routes": [{
+		"source": "^/test.xsodata/.*$",
+		"destination": "alpssjs_be"
+	}, {
+		"source": ".*\\.xsjs",
+		"destination": "alpssjs_be"
+	}]
+}

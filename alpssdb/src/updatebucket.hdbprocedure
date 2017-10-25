@@ -1,0 +1,16 @@
+PROCEDURE "alpss.alpssdb::updatebucket" ( 
+	IN im_bucketid NVARCHAR(10), im_planid NVARCHAR(10), im_desc NVARCHAR(150), im_buckettypeid NVARCHAR(10), im_superiorbucketid NVARCHAR(10), im_planningunitid NVARCHAR(10), im_quantity INTEGER,
+	OUT ex_error NVARCHAR(150)
+)
+  
+   LANGUAGE SQLSCRIPT SQL
+   
+   SECURITY INVOKER AS
+
+   -- READS SQL DATA AS
+BEGIN
+
+UPDATE "alpss.alpssdb::alpssf.PlanningBucket" SET "PlanId"=im_planid, "Description"=im_desc, "BucketTypeId"=im_buckettypeid, "SuperiorBucketId"=im_superiorbucketid, "PlanningUnitId"=im_planningunitid, "Quantity"=im_quantity
+	WHERE "PlanningBucketId"=im_bucketid;
+
+END
