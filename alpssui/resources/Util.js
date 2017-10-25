@@ -1,6 +1,6 @@
 var oPlanDialog;
 var oBucketDialog;
-
+//test
 function createPlan() {
 	
 				var planid = "Plan002";
