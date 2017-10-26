@@ -1,8 +1,14 @@
 service {
- "alpss.alpssdb::alpssf.Plan" as "Plan" navigates ("PlanToBucketAssocSet" as "NavPB", "PlanToFiscalYearAssocSet" as "NavFY");
- "alpss.alpssdb::alpssf.PlanningBucket" as "PlanningBucket" navigates ("BucketToBucketTypeAssocSet" as "NavBBT");
- "alpss.alpssdb::alpssf.C_FiscalYearDefinition" as "FiscalYearDefinition";
+ "alpss.alpssdb::alpssf.Plan" as "Plan" navigates ("PlanToBucketAssocSet" as "NavPB", "PlanToFiscalYearAssocSet" as "NavPFY");
+ "alpss.alpssdb::alpssf.PlanningBucket" as "PlanningBucket" navigates ("BucketToBucketTypeAssocSet" as "NavBBT", "BucketToPlanningUnitAssocSet" as "NavBPU");
+ "alpss.alpssdb::alpssf.C_FiscalYearDefinition" as "FiscalYearDefinition" navigates ("FiscalYearToFiscalPeriodAssocSet" as "NavFYP");
+ "alpss.alpssdb::alpssf.C_FiscalPeriodDefinition" as "FiscalPeriodDefinition";
  "alpss.alpssdb::alpssf.C_BucketTypeDefinition" as "BucketTypeDefinition";
+ "alpss.alpssdb::alpssf.PlanningUnit" as "PlanningUnit" navigates ("PlanningUnitToMethodAssocSet" as "NavPUM", "PlanningUnitToPlanningValueAssocSet" as "NavPUPV");
+ "alpss.alpssdb::alpssf.C_MethodDefinition" as "MethodDefinition";
+ "alpss.alpssdb::alpssf.PlanningValues" as "PlanningValues" navigates ("PlanningValueToValueAssocSet" as "NavPVV", "PlanningValueToActAssocSet" as "NavPVA");
+ "alpss.alpssdb::alpssf.C_ValueCategoryDefinition" as "ValueCategoryDefinition";
+ "alpss.alpssdb::alpssf.C_ActivityTypeDefinition" as "ActivityTypeDefinition";
  
  association "PlanToBucketAssocSet" principal "Plan"("PlanId")
  multiplicity "1" dependent "PlanningBucket"("PlanId") multiplicity "*";
@@ -10,6 +16,24 @@ service {
  association "PlanToFiscalYearAssocSet" principal "Plan"("FiscalYearId")
  multiplicity "1" dependent "FiscalYearDefinition"("FiscalYearId") multiplicity "1"; 
  
+ association "FiscalYearToFiscalPeriodAssocSet" principal "FiscalYearDefinition"("FiscalYearId")
+ multiplicity "1" dependent "FiscalPeriodDefinition"("FiscalYearId") multiplicity "1";
+ 
  association "BucketToBucketTypeAssocSet" principal "PlanningBucket"("BucketTypeId")
  multiplicity "1" dependent "BucketTypeDefinition"("BucketTypeId") multiplicity "1";
+ 
+ association "BucketToPlanningUnitAssocSet" principal "PlanningBucket"("PlanningUnitId")
+ multiplicity "1" dependent "PlanningUnit"("PlanningUnitId") multiplicity "1";
+ 
+ association "PlanningUnitToMethodAssocSet" principal "PlanningUnit"("MethodId")
+ multiplicity "1" dependent "MethodDefinition"("MethodId") multiplicity "1";
+ 
+ association "PlanningUnitToPlanningValueAssocSet" principal "PlanningUnit"("PlanningValuesId")
+ multiplicity "1" dependent "PlanningValues"("PlanningValuesId") multiplicity "*";
+ 
+ association "PlanningValueToValueAssocSet" principal "PlanningValues"("ValCategoryId")
+ multiplicity "1" dependent "ValueCategoryDefinition"("ValCategoryId") multiplicity "1";
+ 
+ association "PlanningValueToActAssocSet" principal "PlanningValues"("ActivityTypeId")
+ multiplicity "1" dependent "ActivityTypeDefinition"("ActivityTypeId") multiplicity "1";
 }
