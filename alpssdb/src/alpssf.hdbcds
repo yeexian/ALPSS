@@ -23,12 +23,58 @@ context alpssf {
     };
 
     entity C_FiscalYearDefinition {
-        key FiscalYearId : String(10);
-            CalendarYear : Integer;
+        key FiscalYearId	: String(10);
+            CalendarYear	: Integer;
+    };
+    
+    entity C_FiscalPeriodDefinition {
+    	key FiscalYearId	: String(10);
+    		Month			: Integer;
+    		Period			: Integer;
     };
 
     entity C_BucketTypeDefinition {
-        key BucketTypeId : String(10);
-            Name         : String(100);
+        key BucketTypeId	: String(10);
+            Name        	: String(100);
     };
+    
+    entity PlanningUnit {
+        key PlanningUnitId         : String(10);
+        	SuperiorPlanningUnitId : String(10);
+        	ReferenceSapUnitId     : String(10);
+        	MethodId               : String(10);
+        	PlanningValuesId       : String(10);
+            Description            : String(150);
+            CreationDate           : LocalDate;
+            CreatedBy              : String(100);
+            ActiveFlag             : Integer;
+            LaborHours             : Decimal(15, 2);
+            LaborCost              : Decimal(15, 2);
+            MaterialCost           : Decimal(15, 2);
+            OtherCost              : Decimal(15, 2);
+    };
+    
+    entity C_MethodDefinition {
+        key MethodId : String(10);
+            Name     : String(100);
+    };
+
+    entity PlanningValues {
+        key PlanningValuesId : String(10);
+        	ValCategoryId    : String(10);
+        	ActivityTypeId   : String(10);
+            Costs            : Decimal(15, 2);
+            Hours            : Integer;
+    };
+
+    entity C_ValueCategoryDefinition {
+        key ValCategoryId : String(10);
+            Name          : String(100);
+    };
+
+    entity C_ActivityTypeDefinition {
+        key ActivityTypeId : String(10);
+            Name           : String(100);
+    };
+   
 };
