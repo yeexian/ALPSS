@@ -28,8 +28,8 @@ service {
  association "PlanningUnitToMethodAssocSet" principal "PlanningUnit"("MethodId")
  multiplicity "1" dependent "MethodDefinition"("MethodId") multiplicity "1";
  
- association "PlanningUnitToPlanningValueAssocSet" principal "PlanningUnit"("PlanningValuesId")
- multiplicity "1" dependent "PlanningValues"("PlanningValuesId") multiplicity "*";
+ association "PlanningUnitToPlanningValueAssocSet" principal "PlanningUnit"("PlanningUnitId")
+ multiplicity "1" dependent "PlanningValues"("PlanningUnitId") multiplicity "*";
  
  association "PlanningValueToValueAssocSet" principal "PlanningValues"("ValCategoryId")
  multiplicity "1" dependent "ValueCategoryDefinition"("ValCategoryId") multiplicity "1";
